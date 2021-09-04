@@ -18,22 +18,29 @@ with Principalcolumn:
 with Interestcolumn:
     interest_rate = st.number_input("Enter the interest rate p/a(%): ", min_value=0.0, format='%f')
 with Frequencycolumn:
-    compounding_frequency = st.selectbox('How often will the interest be compounded?', ('Daily', 'Monthly', 'Annually'))
+    compounding_frequency = st.selectbox('How often will the interest be compounded?', ( 'Monthly', 'Annually'))
 with Timecolumn:
     time_to_invest = st.number_input("Enter the time to invest in months: ", min_value=0.0, format='%f')
 
-frequency = 1
+def calculate_compound_interest(principal, rate, compounding_frequency, time):
+    if compounding_frequency == "Monthly":
+        frequency = 12
+    elif compounding_frequency == "Annually":
+        frequency = 1
+    
+    #convert interest rate to percentage
+    rate = rate/100
+    #convert time to years
+    time = time/12
 
-#formula to calculate compound interest
-def compound_interest(principle, rate, time):
-    # Calculates compound interest
-    Amount = principle * (pow((1 + rate / 100), time))
-    CI = Amount - principle
-    return CI
+    amount = principal * pow( 1+(rate/frequency), (frequency*time))  
+    return amount
 
-returned_interest = compound_interest(principal, interest_rate, frequency)
+total_amount = calculate_compound_interest(principal,interest_rate,compounding_frequency,time_to_invest)
 
+
+#print("{:,}".format(total_amount))
 st.header("**Returns**")
-st.subheader("Total Amount: " + str(principal+returned_interest))
-st.subheader("Initial Amount: " + str(principal))
-st.subheader("Total Interest: " + str(returned_interest))
+st.subheader("Total Amount: " +"Ksh."+ "{:,.2f}".format(total_amount))
+st.subheader("Initial Amount: " +"Ksh."+ "{:,.2f}".format(principal))
+st.subheader("Total Interest: " +"Ksh."+ "{:,.2f}".format(total_amount-principal))
