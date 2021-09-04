@@ -8,7 +8,7 @@ st.set_page_config(
 #header 1
 st.title("MMF Compound Interest Calculator")
 
-st.write("Visit my site @ https://lizkariuki.com/.Code hosted on GitHub:https://github.com/lizwkariuki58/MMF-Calculator.")
+st.write("Visit my site @ https://lizkariuki.com/ .Code hosted on GitHub:https://github.com/lizwkariuki58/MMF-Calculator.")
 
 st.header("**Investing a Lumpsum**")
 #define columns
